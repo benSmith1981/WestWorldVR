@@ -38,7 +38,7 @@ public class EnemyAiTutorial : MonoBehaviour
     //States
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
-    private bool isDead = false;
+    private bool _isDead = false;
 
     private void Awake()
     {
@@ -55,6 +55,16 @@ public class EnemyAiTutorial : MonoBehaviour
         player = GameObject.Find("PlayerController").transform;
         agent = GetComponent<NavMeshAgent>();
 
+    }
+
+    public bool isDead {
+        get {
+            return _isDead;
+        }
+
+        set {
+            _isDead = value;
+        }
     }
 
     private void Update()
@@ -80,7 +90,7 @@ public class EnemyAiTutorial : MonoBehaviour
     private void RunToPointAndShoot() {
         // animator.SetBool("Shoot_b", false);
         // animator.SetInteger("WeaponType_int", 0); 
-        if(isDead) return;
+        if(_isDead) return;
 
         // if (!walkPointSet) SearchWalkPoint();
 
@@ -112,7 +122,7 @@ public class EnemyAiTutorial : MonoBehaviour
     {
         animator.SetBool("Shoot_b", false);
         animator.SetInteger("WeaponType_int", 0); 
-        if(isDead) return;
+        if(_isDead) return;
         if (!walkPointSet) SearchWalkPoint();
 
         if (walkPointSet) {
@@ -158,7 +168,7 @@ public class EnemyAiTutorial : MonoBehaviour
 
     private void ChasePlayer()
     {
-        if(isDead) return;
+        if(_isDead) return;
         animateRunning();
         agent.SetDestination(player.position);
     }
@@ -178,7 +188,7 @@ public class EnemyAiTutorial : MonoBehaviour
 
     private void AttackPlayer()
     {
-        if(isDead) return;
+        if(_isDead) return;
         animateStoppingAndShooting();   
         //Make sure enemy doesn't move
         agent.SetDestination(transform.position);
