@@ -7,6 +7,8 @@ TagManager:
   - 1
   - Ground
   - Bullet
+  - Enemy
+  - Revolver
   layers:
   - Default
   - TransparentFX
@@ -16,8 +18,8 @@ TagManager:
   - UI
   - Ground
   - Player
-  - Saloon
-  - 
+  - DistanceGrabbable
+  - Bullet
   - 
   - 
   - 

@@ -5,10 +5,10 @@ using UnityEngine;
 public class Level
 {
 	public List<Enemy> enemies;
-    int numberOfWaves;
+    public int numberOfWaves;
 
 	public List<Wave> waves = new List<Wave>();
-	public int currentWave = 1;
+	public int currentWave = 0;
 	private bool _levelCompleted = false;
 
     // Start is called before the first frame update

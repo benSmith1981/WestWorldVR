@@ -6,7 +6,10 @@ using UnityEngine;
 public class SimpleShoot : MonoBehaviour
 {
     [Header("Prefab Refrences")]
+    public AudioSource gunShotSound;
+
     public GameObject bulletPrefab;
+    public GameObject line;
     public GameObject casingPrefab;
     public GameObject muzzleFlashPrefab;
 
@@ -32,7 +35,13 @@ public class SimpleShoot : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetButtonDown("Fire1")) {
+            Shoot();
+        }
 
+        if(OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch)){
+
+        }
     }
 
     public void pullTrigger(){
@@ -51,7 +60,7 @@ public class SimpleShoot : MonoBehaviour
             //Create the muzzle flash
             GameObject tempFlash;
             tempFlash = Instantiate(muzzleFlashPrefab, barrelLocation.position, barrelLocation.rotation);
-
+            gunShotSound.Play();
             //Destroy the muzzle flash effect
             Destroy(tempFlash, destroyTimer);
         }
@@ -59,13 +68,21 @@ public class SimpleShoot : MonoBehaviour
         //cancels if there's no bullet prefeb
         if (!bulletPrefab)
         { return; }
-
         // Create a bullet and add force on it in direction of the barrel
         GameObject bullet = Instantiate(bulletPrefab, barrelLocation.position, barrelLocation.rotation);
         bullet.GetComponent<Rigidbody>().AddForce(barrelLocation.forward * shotPower);
+        gunShotSound.Play();
         Destroy(bullet, destroyTimer);
 
+        RaycastHit hitInfo;
+        bool hasHit = Physics.Raycast(barrelLocation.position, barrelLocation.forward, out hitInfo, 100);
 
+        if(line){
+            GameObject liner = Instantiate(line);
+            liner.GetComponent<LineRenderer>().SetPositions(new Vector3[] { barrelLocation.position, hasHit ? hitInfo.point : barrelLocation.position+barrelLocation.forward*100});
+            Destroy(liner,0.5f);
+        }
+        
     }
 
     //This function creates a casing at the ejection slot

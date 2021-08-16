@@ -234,6 +234,7 @@ public class EnemyAiTutorial : MonoBehaviour
         // animator.SetInteger("WeaponType_int", 0); //change to non shoot pose
         animator.SetBool("Death_b", true);
         isDead = true;
+        Destroy(gameObject, 2);
     }
     
     void OnTriggerEnter(Collider other) {
