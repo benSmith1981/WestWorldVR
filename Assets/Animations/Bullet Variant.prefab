@@ -9,6 +9,14 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -1373755570300066892, guid: 06f7eeaeafe714b008482f9ed9cce849, type: 3}
       propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1373755570300066892, guid: 06f7eeaeafe714b008482f9ed9cce849, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 464787123162236022, guid: 06f7eeaeafe714b008482f9ed9cce849, type: 3}
+      propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3535810432470384738, guid: 06f7eeaeafe714b008482f9ed9cce849, type: 3}

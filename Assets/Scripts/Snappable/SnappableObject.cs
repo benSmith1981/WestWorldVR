@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class SnappableObject : MonoBehaviour
 {
+    // public Transform target;
+    // public Vector3 offset;
+
     public GameObject snapObject;
     public bool isSnapped = false;
 
@@ -20,14 +23,47 @@ public class SnappableObject : MonoBehaviour
     void Update()
     {
         grabbed = GetComponent<OVRGrabbable>().isGrabbed; 
+
+
+    }
+
+     private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("SnapToLocation *****  OnTriggerEnter");
+
         objectSnapped = snapObject.GetComponent<SnapToLocation>().snapped;
         if(objectSnapped == true) {
-            GetComponent<Rigidbody>().isKinematic = true; 
-            transform.SetParent(snapObject.transform);
+            // GetComponent<Rigidbody>().isKinematic = false; 
+            // GetComponent<Rigidbody>().useGravity = false;
             isSnapped = true;
-        }
-        if(objectSnapped == false && grabbed == false) {
-            GetComponent<Rigidbody>().isKinematic = false; 
+            transform.SetParent(snapObject.transform);
+            //disablePhysics();
+
         }
     }
+
+    private void OnTriggerExit(Collider other) {
+        Debug.Log("SnapToLocation *****  OnTriggerExit");
+
+        if(objectSnapped == false && grabbed == true) {
+            // GetComponent<Rigidbody>().isKinematic = false; 
+            //GetComponent<Rigidbody>().useGravity = true; 
+            isSnapped = false;
+            //enablePhysics();
+        }
+    }
+
+
+    void enablePhysics() {
+        Rigidbody rb = transform.GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.None;
+    }
+
+    void disablePhysics() {
+        Rigidbody rb = transform.GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+    }
+
+
+
 }

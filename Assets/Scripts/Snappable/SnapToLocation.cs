@@ -40,7 +40,7 @@ public class SnapToLocation : MonoBehaviour
     }
 
     void snapObject() {
-    	if(grabbed == false){//} && insideSnapZone == true) {
+    	if(grabbed == false && insideSnapZone == true) {
 	    	Debug.Log("OnTriggerEnter");
 	    	RocketPart.gameObject.transform.position = transform.position;
 			RocketPart.gameObject.transform.rotation = SnapRotationReference.transform.rotation;

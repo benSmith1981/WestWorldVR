@@ -42,6 +42,8 @@ public class EnemyAiTutorial : MonoBehaviour
 
     private void Awake()
     {
+
+
         m_Text = GetComponent<TextMeshPro>() ?? gameObject.AddComponent<TextMeshPro>();
         m_Text.autoSizeTextContainer = true;
 
@@ -67,6 +69,9 @@ public class EnemyAiTutorial : MonoBehaviour
         }
     }
 
+    void Start() {
+        //Instantiate(gun, transform.position, transform.rotation);
+    }
     private void Update()
     {
         //Check for sight and attack range

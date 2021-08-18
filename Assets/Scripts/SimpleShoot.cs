@@ -7,9 +7,10 @@ public class SimpleShoot : MonoBehaviour
 {
     [Header("Prefab Refrences")]
     public AudioSource gunShotSound;
+    [SerializeField] GameObject liner;
+    private GameObject linerRender;
 
     public GameObject bulletPrefab;
-    public GameObject line;
     public GameObject casingPrefab;
     public GameObject muzzleFlashPrefab;
 
@@ -20,7 +21,7 @@ public class SimpleShoot : MonoBehaviour
 
     [Header("Settings")]
     [Tooltip("Specify time to destory the casing object")] [SerializeField] private float destroyTimer = 2f;
-    [Tooltip("Bullet Speed")] [SerializeField] private float shotPower = 500f;
+    [Tooltip("Bullet Speed")] [SerializeField] private float shotPower = 1000f;
     [Tooltip("Casing Ejection Speed")] [SerializeField] private float ejectPower = 150f;
 
 
@@ -35,8 +36,12 @@ public class SimpleShoot : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1")) {
-            Shoot();
+        if(gameObject.GetComponent<OVRGrabbable>()){
+            if (Input.GetButtonDown("Fire1") && (gameObject.GetComponent<OVRGrabbable>().isGrabbed || 
+                gameObject.tag == "Player")) {
+                Shoot();
+            }
+
         }
 
         if(OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch)){
@@ -50,7 +55,6 @@ public class SimpleShoot : MonoBehaviour
         gunAnimator.SetTrigger("Fire");
         
     }
-
 
     //This function creates the bullet behavior
     public void Shoot()
@@ -71,17 +75,25 @@ public class SimpleShoot : MonoBehaviour
         // Create a bullet and add force on it in direction of the barrel
         GameObject bullet = Instantiate(bulletPrefab, barrelLocation.position, barrelLocation.rotation);
         bullet.GetComponent<Rigidbody>().AddForce(barrelLocation.forward * shotPower);
-        gunShotSound.Play();
+        if(gunShotSound){
+            gunShotSound.Play();
+        }
         Destroy(bullet, destroyTimer);
 
         RaycastHit hitInfo;
         bool hasHit = Physics.Raycast(barrelLocation.position, barrelLocation.forward, out hitInfo, 100);
 
-        if(line){
-            GameObject liner = Instantiate(line);
-            liner.GetComponent<LineRenderer>().SetPositions(new Vector3[] { barrelLocation.position, hasHit ? hitInfo.point : barrelLocation.position+barrelLocation.forward*100});
-            Destroy(liner,0.5f);
+        if(liner) {
+            if(hasHit)
+            {
+                linerRender = Instantiate(liner);
+                linerRender.GetComponent<LineRenderer>().SetPositions(new Vector3[] { barrelLocation.position, hasHit ? hitInfo.point : barrelLocation.position+barrelLocation.forward*100});
+                Destroy(linerRender,0.4f);
+
+            } 
         }
+
+
         
     }
 
