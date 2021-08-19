@@ -27,7 +27,7 @@ public class SnappableObject : MonoBehaviour
 
     }
 
-     private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         Debug.Log("SnapToLocation *****  OnTriggerEnter");
 

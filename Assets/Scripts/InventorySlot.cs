@@ -16,7 +16,8 @@ public class InventorySlot : MonoBehaviour
 		{
 			MeshRenderer placeholderMesh = mesh.GetComponent<MeshRenderer>();
 			placeholderMeshes.Add(placeholderMesh);
-			placeholderMesh.enabled = false;
+			placeholderMesh.material.color = new Color(1f, 1f, 1f, 0.2f);
+			// placeholderMesh.enabled = false;
 		}
 
 	}
@@ -26,7 +27,9 @@ public class InventorySlot : MonoBehaviour
 		if (supportedItemTypes.Contains(itemType))
 		{
 			int index = supportedItemTypes.IndexOf(itemType);
-			placeholderMeshes[index].enabled = value;
+			//placeholderMeshes[index].enabled = value;
+			placeholderMeshes[index].material.color = new Color(1f, 1f, 1f, value ? 0.2f : 0.6f);
+
 		}
 
 	}

@@ -248,6 +248,11 @@ public class EnemyAiTutorial : MonoBehaviour
             Invoke(nameof(DestroyEnemy), 0.0f);
             TakeDamage(100);
             Instantiate(blood, other.transform);
+        } 
+        if(other.gameObject.tag == "Knife"){
+            Invoke(nameof(DestroyEnemy), 0.0f);
+            TakeDamage(100);
+            Instantiate(blood, other.transform);
         }
     }
 

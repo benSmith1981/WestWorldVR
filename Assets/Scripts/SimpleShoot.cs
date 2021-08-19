@@ -1,14 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 [AddComponentMenu("Nokobot/Modern Guns/Simple Shoot")]
 public class SimpleShoot : MonoBehaviour
 {
     [Header("Prefab Refrences")]
-    public AudioSource gunShotSound;
+    public AudioSource source;
+    public AudioClip reload;
+    public AudioClip shoot;
     [SerializeField] GameObject liner;
     private GameObject linerRender;
+
+    public TextMeshProUGUI AmmoTextMesh;
+    public int maxAmmo = 6;
+    public int currentAmmo = 6;
 
     public GameObject bulletPrefab;
     public GameObject casingPrefab;
@@ -32,6 +39,8 @@ public class SimpleShoot : MonoBehaviour
 
         if (gunAnimator == null)
             gunAnimator = GetComponentInChildren<Animator>();
+
+        AmmoTextMesh.text = currentAmmo+"";
     }
 
     void Update()
@@ -47,6 +56,15 @@ public class SimpleShoot : MonoBehaviour
         if(OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch)){
 
         }
+
+        if(Vector3.Angle(transform.up, Vector3.up) > 100 & currentAmmo < maxAmmo)
+            Reload();
+    }
+
+    void Reload() {
+        currentAmmo = maxAmmo;
+        AmmoTextMesh.text = currentAmmo+"";
+        source.PlayOneShot(reload);
     }
 
     public void pullTrigger(){
@@ -59,12 +77,16 @@ public class SimpleShoot : MonoBehaviour
     //This function creates the bullet behavior
     public void Shoot()
     {
+        currentAmmo-=1;
+        AmmoTextMesh.text = currentAmmo+"";
+        if(currentAmmo > 0) return;
+
         if (muzzleFlashPrefab)
         {
             //Create the muzzle flash
             GameObject tempFlash;
             tempFlash = Instantiate(muzzleFlashPrefab, barrelLocation.position, barrelLocation.rotation);
-            gunShotSound.Play();
+            source.PlayOneShot(shoot);
             //Destroy the muzzle flash effect
             Destroy(tempFlash, destroyTimer);
         }
@@ -75,9 +97,7 @@ public class SimpleShoot : MonoBehaviour
         // Create a bullet and add force on it in direction of the barrel
         GameObject bullet = Instantiate(bulletPrefab, barrelLocation.position, barrelLocation.rotation);
         bullet.GetComponent<Rigidbody>().AddForce(barrelLocation.forward * shotPower);
-        if(gunShotSound){
-            gunShotSound.Play();
-        }
+        source.PlayOneShot(shoot);
         Destroy(bullet, destroyTimer);
 
         RaycastHit hitInfo;

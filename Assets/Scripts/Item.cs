@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 
 public class Item: MonoBehaviour
 {
@@ -11,20 +11,70 @@ public class Item: MonoBehaviour
 	PISTOL
 	}
 	public ItemType itemType;
-	public bool isSnapped;
+	public bool isSnapped = true;
 	public InventorySlot hoveredInventorySlot;
-	public void Start()
-	{
-		isSnapped = false;
+
+	private bool grabbed = false;
+
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        // m_Text = GameObject_m_Text.GetComponent<TextMeshProUGUI>();// 
+  //       m_Text = gameObject.AddComponent<TextMeshPro>();
+        // m_Text.text = "test";
+  //       m_Text.autoSizeTextContainer = true;
+		// m_Text.fontSize = 0.2f;
+
+		isSnapped = true;
 	}
 
+	public void Update() {
+		grabbed = GetComponent<OVRGrabbable>().isGrabbed; 
+		// m_Text.text = grabbed ? "Grabbed" : "Not Grabbed";
+		if(grabbed && isSnapped){
+			OnPickup();
+			// m_Text.text = "6";
+			 // m_Text.text = grabbed ? "grabbed" : "Not grabbed";
 
-	public void OnTriggerEnter(Collider other) {
+		} else if (isSnapped && !grabbed){
+			OnDrop();
+		}
+
+   	}
+
+	public void OnTriggerEnter(Collider other) 
+	{
 		if (isSnapped)
 		{
 			return;
-		}
 
+		}
+		// m_Text.text = other.tag+" ... grabbed: " + grabbed + " isSnapped:" + isSnapped;
+		if(other.tag == "InventorySlot"){
+			if(!grabbed && !isSnapped){
+			    // m_Text.text = other.tag+" ... grabbed: " + grabbed + " isSnapped:" + isSnapped;
+
+				OnDrop();
+			}
+		}
+  
+		ShowInventory(other);
+
+	}
+
+	public void OnTriggerExit(Collider other)
+	{
+		if (isSnapped)
+		{
+			return;
+
+		}
+		HideInventory(other);
+	}
+
+	void ShowInventory(Collider other) {
 		InventorySlot inventorySlot = other.transform.GetComponent<InventorySlot>();
 		if (inventorySlot)
 		{
@@ -33,13 +83,7 @@ public class Item: MonoBehaviour
 		}
 	}
 
-	public void OnTriggerExit(Collider other)
-	{
-		if (isSnapped)
-		{
-			return;
-		}
-
+	void HideInventory(Collider other){
 		InventorySlot inventorySlot = other.transform.GetComponent<InventorySlot>();
 		if (hoveredInventorySlot == inventorySlot)
 		{
@@ -50,6 +94,7 @@ public class Item: MonoBehaviour
 
     public void OnPickup()
     {
+    	//if(!isSnapped && grabbed) return;
         if (isSnapped)
         {
             DetachFromInventorySlot();
@@ -62,6 +107,7 @@ public class Item: MonoBehaviour
 
     public void OnDrop()
     {
+    	//if(isSnapped)return;
         if (hoveredInventorySlot != null && !hoveredInventorySlot.isOccupied)
         {
             AttachToInventorySlot();
@@ -76,6 +122,7 @@ public class Item: MonoBehaviour
             hoveredInventorySlot = null;
         }
         isSnapped = false;
+        transform.SetParent(null);
         EnablePhysics();
     }
 
