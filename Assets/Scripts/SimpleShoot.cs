@@ -77,9 +77,7 @@ public class SimpleShoot : MonoBehaviour
     //This function creates the bullet behavior
     public void Shoot()
     {
-        currentAmmo-=1;
-        AmmoTextMesh.text = currentAmmo+"";
-        if(currentAmmo > 0) return;
+        if(CheckAmmoIsZero()) return;
 
         if (muzzleFlashPrefab)
         {
@@ -112,9 +110,17 @@ public class SimpleShoot : MonoBehaviour
 
             } 
         }
+    }
 
-
-        
+    public bool CheckAmmoIsZero()
+    {
+        if(currentAmmo <= 0){
+            return true;
+        } else{
+            currentAmmo-=1;
+            AmmoTextMesh.text = currentAmmo+"";
+            return false;
+        } 
     }
 
     //This function creates a casing at the ejection slot

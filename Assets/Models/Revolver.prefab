@@ -268,6 +268,21 @@ MonoBehaviour:
   m_snapOffset: {fileID: 2209535763229483240, guid: bee7911884d9b4b3989437d8f15d2d6e, type: 3}
   m_grabPoints: []
   m_materialColorField: 
+--- !u!114 &1655174433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570227221959941171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9306739f0aac14fcca604b7d639e106f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemType: 1
+  isSnapped: 0
+  hoveredInventorySlot: {fileID: 0}
 --- !u!114 &1645600249888689162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,21 +328,6 @@ MonoBehaviour:
   m_snapOrientation: 0
   m_snapOffset: {fileID: 0}
   m_grabPoints: []
---- !u!114 &1655174433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1570227221959941171}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9306739f0aac14fcca604b7d639e106f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemType: 1
-  isSnapped: 0
-  hoveredInventorySlot: {fileID: 0}
 --- !u!1 &2367740024041043257
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,7 +415,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

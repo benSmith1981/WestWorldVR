@@ -24,7 +24,7 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4173264842706263142}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 4
   m_Convex: 1
@@ -41,7 +41,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4898376589914736847, guid: fbd343341dcc347cdb0ee96cc771140a, type: 3}
 --- !u!114 &1700397411
@@ -75,10 +75,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 0
-  isSnapped: 1
+  isSnapped: 0
   hoveredInventorySlot: {fileID: 0}
-  GameObject_m_Text: {fileID: 0}
-  m_Text: {fileID: 0}
+--- !u!114 &8863482451300604158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4173264842706263142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02d61468f8b77ae4b92c344bc9a600fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_allowOffhandGrab: 1
+  m_snapPosition: 0
+  m_snapOrientation: 0
+  m_snapOffset: {fileID: 0}
+  m_grabPoints: []
 --- !u!1001 &3831159836078186807
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -92,43 +107,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fbd343341dcc347cdb0ee96cc771140a, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fbd343341dcc347cdb0ee96cc771140a, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fbd343341dcc347cdb0ee96cc771140a, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fbd343341dcc347cdb0ee96cc771140a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0322
+      value: -0.54
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fbd343341dcc347cdb0ee96cc771140a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.4689
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fbd343341dcc347cdb0ee96cc771140a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.1695
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fbd343341dcc347cdb0ee96cc771140a, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.49325043
+      value: -0.51340806
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fbd343341dcc347cdb0ee96cc771140a, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.47522756
+      value: 0.46881235
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fbd343341dcc347cdb0ee96cc771140a, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.49325055
+      value: -0.48659202
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fbd343341dcc347cdb0ee96cc771140a, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.5362525
+      value: -0.5290135
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fbd343341dcc347cdb0ee96cc771140a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -153,6 +168,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: fbd343341dcc347cdb0ee96cc771140a, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fbd343341dcc347cdb0ee96cc771140a, type: 3}
+      propertyPath: m_TagString
+      value: Knife
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fbd343341dcc347cdb0ee96cc771140a, type: 3}
